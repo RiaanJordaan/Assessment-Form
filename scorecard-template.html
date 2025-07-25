@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liyema Consulting - Flexible Resource Management Candidate Assessment Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo h1 {
+            color: #8B4513;
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .logo .consulting {
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        
+        .form-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+            color: #333;
+        }
+        
+        .info-section {
+            margin-bottom: 30px;
+        }
+        
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            margin-right: 10px;
+        }
+        
+        .info-input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .panel-section {
+            margin: 30px 0;
+        }
+        
+        .section-title {
+            font-weight: bold;
+            font-style: italic;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        
+        .panel-table, .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        .panel-table th, .panel-table td,
+        .scoring-table th, .scoring-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        .panel-table th, .scoring-table th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        .scoring-guide {
+            margin: 20px 0;
+        }
+        
+        .scoring-guide-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .score-number {
+            font-weight: bold;
+            width: 20px;
+            margin-right: 20px;
+        }
+        
+        .competency-input {
+            width: 80px;
+            text-align: center;
+            padding: 6px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            font-size: 14px;
+        }
+        
+        .notes-input {
+            width: 100%;
+            padding: 4px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .average-section {
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        
+        .average-label {
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .average-display {
+            font-weight: bold;
+            font-size: 18px;
+            color: #333;
+            margin-left: 10px;
+        }
+        
+        .feedback-section {
+            margin: 20px 0;
+        }
+        
+        .feedback-input {
+            width: 100%;
+            height: 60px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .comments-section {
+            margin: 20px 0;
+        }
+        
+        .comments-input {
+            width: 100%;
+            height: 120px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        
+        .recommendation-section {
+            margin: 20px 0;
+        }
+        
+        .recommendation-options {
+            margin: 10px 0;
+        }
+        
+        .recommendation-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        .recommendation-option input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .signature-section {
+            margin: 30px 0;
+        }
+        
+        .signature-row {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .signature-label {
+            font-weight: bold;
+            width: 120px;
+            margin-right: 10px;
+        }
+        
+        .signature-input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        
+        .save-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        
+        .save-btn {
+            background-color: #8B4513;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        
+        .save-btn:hover {
+            background-color: #6B3410;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        
+        .instructions {
+            background-color: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Instructions for Client -->
+        <div class="instructions">
+            <h4>📋 Instructions for Completing This Assessment</h4>
+            <ul>
+                <li><strong>Auto-Save:</strong> Your progress is automatically saved as you type</li>
+                <li><strong>Scoring:</strong> Use the dropdown boxes to select scores from 0-5</li>
+                <li><strong>Final Step:</strong> Click "Download Completed Assessment" when finished</li>
+                <li><strong>Questions?</strong> Contact us at info@liyemahr.co.za</li>
+            </ul>
+        </div>
+        
+        <!-- Logo Section -->
+        <div class="logo">
+            <h1>LIYEMA</h1>
+            <div class="consulting">CONSULTING</div>
+        </div>
+        
+        <!-- Form Title -->
+        <div class="form-title">
+            Flexible Resource Management Candidate<br>
+            Assessment Form
+        </div>
+        
+        <!-- Subtitle - CUSTOMIZE THIS BEFORE SHARING -->
+        <div class="subtitle">
+            Interview Scorecard: [POSITION] - [CANDIDATE NAME]
+        </div>
+        
+        <!-- Basic Information -->
+        <div class="info-section">
+            <div class="info-row">
+                <label class="info-label">Candidate Name:</label>
+                <input type="text" class="info-input" id="candidateName" placeholder="Enter candidate name">
+            </div>
+            <div class="info-row">
+                <label class="info-label">Position:</label>
+                <input type="text" class="info-input" id="position" placeholder="Enter position">
+            </div>
+            <div class="info-row">
+                <label class="info-label">Interview Date:</label>
+                <input type="date" class="info-input" id="interviewDate">
+            </div>
+        </div>
+        
+        <!-- Panel Members - CUSTOMIZE THESE BEFORE SHARING -->
+        <div class="panel-section">
+            <div class="section-title">Panel Members:</div>
+            <table class="panel-table">
+                <tr>
+                    <td><input type="text" class="info-input" placeholder="Panel Member 1 Name" id="panelist1"></td>
+                    <td><input type="text" class="info-input" placeholder="Role/Title" id="role1"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="info-input" placeholder="Panel Member 2 Name" id="panelist2"></td>
+                    <td><input type="text" class="info-input" placeholder="Role/Title" id="role2"></td>
+                </tr>
+                <tr>
+                    <td><input type="text" class="info-input" placeholder="Panel Member 3 Name" id="panelist3"></td>
+                    <td><input type="text" class="info-input" placeholder="Role/Title" id="role3"></td>
+                </tr>
+            </table>
+        </div>
+        
+        <!-- Scoring Guide -->
+        <div class="scoring-guide">
+            <div class="section-title">Scoring Guide:</div>
+            <div class="scoring-guide-item">
+                <div class="score-number">5</div>
+                <div>Excellent</div>
+            </div>
+            <div class="scoring-guide-item">
+                <div class="score-number">4</div>
+                <div>Good</div>
+            </div>
+            <div class="scoring-guide-item">
+                <div class="score-number">3</div>
+                <div>Satisfactory</div>
+            </div>
+            <div class="scoring-guide-item">
+                <div class="score-number">2</div>
+                <div>Below Average</div>
+            </div>
+            <div class="scoring-guide-item">
+                <div class="score-number">1</div>
+                <div>Poor</div>
+            </div>
+            <div class="scoring-guide-item">
+                <div class="score-number">0</div>
+                <div>Not Observed</div>
+            </div>
+        </div>
+        
+        <!-- Core Competencies Scoring -->
+        <div class="section-title">Core Competencies Scoring:</div>
+        <table class="scoring-table">
+            <thead>
+                <tr>
+                    <th>Competency</th>
+                    <th>Score (0-5)</th>
+                    <th>Panel Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Initiative</td>
+                    <td>
+                        <select class="competency-input" id="score1" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes1" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Stress Tolerance</td>
+                    <td>
+                        <select class="competency-input" id="score2" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes2" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Planning & Organizing</td>
+                    <td>
+                        <select class="competency-input" id="score3" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes3" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Work Standards</td>
+                    <td>
+                        <select class="competency-input" id="score4" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes4" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Teamwork</td>
+                    <td>
+                        <select class="competency-input" id="score5" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes5" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Communication Skills</td>
+                    <td>
+                        <select class="competency-input" id="score6" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes6" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Leadership / Ownership</td>
+                    <td>
+                        <select class="competency-input" id="score7" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes7" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Technical Questions</td>
+                    <td>
+                        <select class="competency-input" id="score8" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes8" placeholder="Enter notes here..."></td>
+                </tr>
+                <tr>
+                    <td>Organizational Fit</td>
+                    <td>
+                        <select class="competency-input" id="score9" onchange="calculateAverage()">
+                            <option value="">Select</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </td>
+                    <td><input type="text" class="notes-input" id="notes9" placeholder="Enter notes here..."></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Average Score -->
+        <div class="average-section">
+            <span class="average-label">Average Score</span>
+            <span class="average-display" id="averageScore">____</span>
+            <span>/45</span>
+        </div>
+        
+        <!-- Feedback -->
+        <div class="feedback-section">
+            <div class="section-title">Feedback:</div>
+            <textarea class="feedback-input" id="feedback" placeholder="Enter feedback here..."></textarea>
+        </div>
+        
+        <!-- Additional Comments -->
+        <div class="comments-section">
+            <div class="section-title">Additional Comments:</div>
+            <textarea class="comments-input" id="additionalComments" placeholder="Enter additional comments here..."></textarea>
+        </div>
+        
+        <!-- Final Recommendation -->
+        <div class="recommendation-section">
+            <div class="section-title">Final Recommendation:</div>
+            <div class="recommendation-options">
+                <div class="recommendation-option">
+                    <input type="checkbox" id="strongHire">
+                    <label for="strongHire">Strong Hire</label>
+                </div>
+                <div class="recommendation-option">
+                    <input type="checkbox" id="hire">
+                    <label for="hire">Hire</label>
+                </div>
+                <div class="recommendation-option">
+                    <input type="checkbox" id="considerReservations">
+                    <label for="considerReservations">Consider with Reservations</label>
+                </div>
+                <div class="recommendation-option">
+                    <input type="checkbox" id="doNotHire">
+                    <label for="doNotHire">Do Not Hire</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="signature-row">
+                <label class="signature-label">Panelist Name:</label>
+                <input type="text" class="signature-input" id="panelistName" placeholder="Enter your name">
+            </div>
+            <div class="signature-row">
+                <label class="signature-label">Date:</label>
+                <input type="date" class="signature-input" id="signatureDate">
+            </div>
+        </div>
+        
+        <!-- Save Section -->
+        <div class="save-section">
+            <h3>Save Your Assessment</h3>
+            <p>Your progress is automatically saved in your browser. Click below to download the completed form.</p>
+            <button class="save-btn" onclick="saveFormAsHTML()">Download Completed Assessment</button>
+            <button class="save-btn" onclick="printForm()">Print Form</button>
+            <button class="save-btn" onclick="clearForm()">Clear All Data</button>
+            
+            <div style="margin-top: 15px; padding: 10px; background-color: #e8f5e8; border-radius: 5px; font-size: 14px;">
+                <strong>📱 Auto-Save:</strong> Your progress is automatically saved as you type. You can close and reopen this page anytime.
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="contact-info">
+            📞 +27 11 484 9339 &nbsp;&nbsp; 📧 info@liyemahr.co.za &nbsp;&nbsp; 🌐 www.liyemahr.co.za &nbsp;&nbsp; 📍 Johannesburg, South Africa
+        </div>
+    </div>
+
+    <script>
+        // Auto-save functionality
+        function saveToLocalStorage() {
+            const formData = gatherFormData();
+            localStorage.setItem('scorecardData', JSON.stringify(formData));
+        }
+        
+        // Load data from local storage
+        function loadFromLocalStorage() {
+            const savedData = localStorage.getItem('scorecardData');
+            if (savedData) {
+                const data = JSON.parse(savedData);
+                
+                // Restore basic info
+                document.getElementById('candidateName').value = data.candidateName || '';
+                document.getElementById('position').value = data.position || '';
+                document.getElementById('interviewDate').value = data.interviewDate || '';
+                
+                // Restore panel members
+                document.getElementById('panelist1').value = data.panelist1 || '';
+                document.getElementById('role1').value = data.role1 || '';
+                document.getElementById('panelist2').value = data.panelist2 || '';
+                document.getElementById('role2').value = data.role2 || '';
+                document.getElementById('panelist3').value = data.panelist3 || '';
+                document.getElementById('role3').value = data.role3 || '';
+                
+                // Restore scores
+                for (let i = 1; i <= 9; i++) {
+                    if (data.scores[i-1]) {
+                        document.getElementById(`score${i}`).value = data.scores[i-1];
+                    }
+                    if (data.notes[i-1]) {
+                        document.getElementById(`notes${i}`).value = data.notes[i-1];
+                    }
+                }
+                
+                // Restore other fields
+                document.getElementById('feedback').value = data.feedback || '';
+                document.getElementById('additionalComments').value = data.additionalComments || '';
+                document.getElementById('panelistName').value = data.panelistName || '';
+                document.getElementById('signatureDate').value = data.signatureDate || '';
+                
+                // Restore recommendation
+                if (data.recommendation) {
+                    const recommendationMap = {
+                        'Strong Hire': 'strongHire',
+                        'Hire': 'hire',
+                        'Consider with Reservations': 'considerReservations',
+                        'Do Not Hire': 'doNotHire'
+                    };
+                    const checkboxId = recommendationMap[data.recommendation];
+                    if (checkboxId) {
+                        document.getElementById(checkboxId).checked = true;
+                    }
+                }
+                
+                // Recalculate average
+                calculateAverage();
+            }
+        }
+        
+        // Clear all form data
+        function clearForm() {
+            if (confirm('Are you sure you want to clear all data? This cannot be undone.')) {
+                localStorage.removeItem('scorecardData');
+                location.reload();
+            }
+        }
+        
+        // Setup auto-save listeners
+        function setupAutoSave() {
+            // Add listeners to all input fields
+            const inputs = document.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', saveToLocalStorage);
+                input.addEventListener('change', saveToLocalStorage);
+            });
+        }
+        
+        // Calculate average score automatically
+        function calculateAverage() {
+            let total = 0;
+            let count = 0;
+            
+            for (let i = 1; i <= 9; i++) {
+                const scoreInput = document.getElementById(`score${i}`);
+                if (scoreInput.value !== '') {
+                    total += parseInt(scoreInput.value);
+                    count++;
+                }
+            }
+            
+            if (count > 0) {
+                const average = (total / count).toFixed(1);
+                document.getElementById('averageScore').textContent = average;
+            } else {
+                document.getElementById('averageScore').textContent = '____';
+            }
+            
+            // Save after calculation
+            saveToLocalStorage();
+        }
+        
+        // Handle checkbox selection (only one recommendation can be selected)
+        function setupRecommendationCheckboxes() {
+            const checkboxes = ['strongHire', 'hire', 'considerReservations', 'doNotHire'];
+            
+            checkboxes.forEach(id => {
+                document.getElementById(id).addEventListener('change', function() {
+                    if (this.checked) {
+                        checkboxes.forEach(otherId => {
+                            if (otherId !== id) {
+                                document.getElementById(otherId).checked = false;
+                            }
+                        });
+                    }
+                    saveToLocalStorage();
+                });
+            });
+        }
+        
+        // Save form as HTML
+        function saveFormAsHTML() {
+            // Get the current form data
+            const formData = gatherFormData();
+            
+            // Create a complete HTML document with the filled data
+            const htmlContent = generateFilledHTML(formData);
+            
+            // Create and download the file
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Assessment_${formData.candidateName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('Assessment form saved successfully!');
+        }
+        
+        // Gather all form data
+        function gatherFormData() {
+            const data = {
+                candidateName: document.getElementById('candidateName').value,
+                position: document.getElementById('position').value,
+                interviewDate: document.getElementById('interviewDate').value,
+                panelist1: document.getElementById('panelist1').value,
+                role1: document.getElementById('role1').value,
+                panelist2: document.getElementById('panelist2').value,
+                role2: document.getElementById('role2').value,
+                panelist3: document.getElementById('panelist3').value,
+                role3: document.getElementById('role3').value,
+                scores: [],
+                notes: [],
+                averageScore: document.getElementById('averageScore').textContent,
+                feedback: document.getElementById('feedback').value,
+                additionalComments: document.getElementById('additionalComments').value,
+                recommendation: '',
+                panelistName: document.getElementById('panelistName').value,
+                signatureDate: document.getElementById('signatureDate').value
+            };
+            
+            // Gather scores and notes
+            for (let i = 1; i <= 9; i++) {
+                data.scores.push(document.getElementById(`score${i}`).value);
+                data.notes.push(document.getElementById(`notes${i}`).value);
+            }
+            
+            // Get selected recommendation
+            const recommendations = ['strongHire', 'hire', 'considerReservations', 'doNotHire'];
+            const recommendationTexts = ['Strong Hire', 'Hire', 'Consider with Reservations', 'Do Not Hire'];
+            
+            for (let i = 0; i < recommendations.length; i++) {
+                if (document.getElementById(recommendations[i]).checked) {
+                    data.recommendation = recommendationTexts[i];
+                    break;
+                }
+            }
+            
+            return data;
+        }
+        
+        // Generate filled HTML document
+        function generateFilledHTML(data) {
+            const competencies = [
+                'Initiative', 'Stress Tolerance', 'Planning & Organizing', 'Work Standards',
+                'Teamwork', 'Communication Skills', 'Leadership / Ownership', 
+                'Technical Questions', 'Organizational Fit'
+            ];
+            
+            let scoresTableRows = '';
+            for (let i = 0; i < competencies.length; i++) {
+                scoresTableRows += `
+                    <tr>
+                        <td>${competencies[i]}</td>
+                        <td style="text-align: center; font-weight: bold;">${data.scores[i] || ''}</td>
+                        <td>${data.notes[i] || ''}</td>
+                    </tr>
+                `;
+            }
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Assessment - ${data.candidateName}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 20px auto; padding: 20px; }
+        .container { background-color: white; padding: 30px; }
+        .logo { text-align: center; margin-bottom: 20px; }
+        .logo h1 { color: #8B4513; margin: 0; font-size: 28px; font-weight: bold; }
+        .logo .consulting { color: #333; font-size: 14px; letter-spacing: 2px; }
+        .form-title { text-align: center; font-size: 18px; font-weight: bold; margin: 20px 0; }
+        .subtitle { text-align: center; font-size: 16px; font-weight: bold; margin: 10px 0 30px 0; }
+        .info-row { display: flex; margin-bottom: 10px; }
+        .info-label { font-weight: bold; width: 120px; margin-right: 10px; }
+        .section-title { font-weight: bold; font-style: italic; margin: 20px 0 15px 0; font-size: 16px; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #333; padding: 8px; text-align: left; }
+        th { background-color: #f0f0f0; font-weight: bold; }
+        .scoring-guide-item { display: flex; margin-bottom: 5px; }
+        .score-number { font-weight: bold; width: 20px; margin-right: 20px; }
+        .average-section { margin: 20px 0; font-weight: bold; font-size: 16px; }
+        .recommendation { font-weight: bold; color: #8B4513; }
+        .contact-info { text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #ccc; padding-top: 15px; }
+        .completed-stamp { text-align: center; color: #8B4513; font-weight: bold; margin: 20px 0; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>LIYEMA</h1>
+            <div class="consulting">CONSULTING</div>
+        </div>
+        
+        <div class="form-title">
+            Flexible Resource Management Candidate<br>Assessment Form
+        </div>
+        
+        <div class="subtitle">
+            Interview Scorecard: ${data.position} - ${data.candidateName}
+        </div>
+        
+        <div class="completed-stamp">
+            *** COMPLETED ASSESSMENT ***<br>
+            Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+        </div>
+        
+        <div class="info-row">
+            <span class="info-label">Candidate Name:</span>
+            <span>${data.candidateName}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Position:</span>
+            <span>${data.position}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">Interview Date:</span>
+            <span>${data.interviewDate}</span>
+        </div>
+        
+        <div class="section-title">Panel Members:</div>
+        <table>
+            <tr><td>${data.panelist1}</td><td>${data.role1}</td></tr>
+            <tr><td>${data.panelist2}</td><td>${data.role2}</td></tr>
+            <tr><td>${data.panelist3}</td><td>${data.role3}</td></tr>
+        </table>
+        
+        <div class="section-title">Scoring Guide:</div>
+        <div class="scoring-guide-item"><div class="score-number">5</div><div>Excellent</div></div>
+        <div class="scoring-guide-item"><div class="score-number">4</div><div>Good</div></div>
+        <div class="scoring-guide-item"><div class="score-number">3</div><div>Satisfactory</div></div>
+        <div class="scoring-guide-item"><div class="score-number">2</div><div>Below Average</div></div>
+        <div class="scoring-guide-item"><div class="score-number">1</div><div>Poor</div></div>
+        <div class="scoring-guide-item"><div class="score-number">0</div><div>Not Observed</div></div>
+        
+        <div class="section-title">Core Competencies Scoring:</div>
+        <table>
+            <thead>
+                <tr><th>Competency</th><th>Score (0-5)</th><th>Panel Notes</th></tr>
+            </thead>
+            <tbody>
+                ${scoresTableRows}
+            </tbody>
+        </table>
+        
+        <div class="average-section">
+            Average Score: ${data.averageScore}/45
+        </div>
+        
+        <div class="section-title">Feedback:</div>
+        <p>${data.feedback || 'No feedback provided'}</p>
+        
+        <div class="section-title">Additional Comments:</div>
+        <p>${data.additionalComments || 'No additional comments'}</p>
+        
+        <div class="section-title">Final Recommendation:</div>
+        <p class="recommendation">${data.recommendation || 'No recommendation selected'}</p>
+        
+        <div style="margin-top: 30px;">
+            <div><strong>Panelist Name:</strong> ${data.panelistName}</div>
+            <div><strong>Date:</strong> ${data.signatureDate}</div>
+        </div>
+        
+        <div class="contact-info">
+            📞 +27 11 484 9339 &nbsp;&nbsp; 📧 info@liyemahr.co.za &nbsp;&nbsp; 🌐 www.liyemahr.co.za &nbsp;&nbsp; 📍 Johannesburg, South Africa
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+        
+        // Print form
+        function printForm() {
+            window.print();
+        }
+        
+        // Initialize the form
+        document.addEventListener('DOMContentLoaded', function() {
+            setupRecommendationCheckboxes();
+            setupAutoSave();
+            loadFromLocalStorage();
+            
+            // Set current date as default signature date if not already set
+            if (!document.getElementById('signatureDate').value) {
+                document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
+            }
+        });
+    </script>
+</body>
+</html>
