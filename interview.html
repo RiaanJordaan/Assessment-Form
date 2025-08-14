@@ -548,13 +548,14 @@
         <!-- Save Section -->
         <div class="save-section">
             <h3>Save Your Assessment</h3>
-            <p>Your progress is automatically saved in your browser. Click below to download the completed form.</p>
-            <button class="save-btn" onclick="saveFormAsHTML()">Download Completed Assessment</button>
+            <p>Click below to download the form with all your entered details for sharing with clients.</p>
+            <button class="save-btn" onclick="downloadHTMLVersion()">Download HTML Version</button>
             <button class="save-btn" onclick="printForm()">Print Form</button>
             <button class="save-btn" onclick="clearForm()">Clear All Data</button>
             
             <div style="margin-top: 15px; padding: 10px; background-color: #e8f5e8; border-radius: 5px; font-size: 14px;">
-                <strong>📱 Auto-Save:</strong> Your progress is automatically saved as you type. You can close and reopen this page anytime.
+                <strong>📱 Auto-Save:</strong> Your progress is automatically saved as you type. You can close and reopen this page anytime.<br>
+                <strong>💾 Download:</strong> The HTML version shows all your entered details and works on any computer!
             </div>
         </div>
         
@@ -1368,6 +1369,355 @@
             return htmlContent;
         }
         
+        
+        // Download HTML Version - Creates file with all entered values visible
+        function downloadHTMLVersion() {
+            // Get all current form data
+            const formData = gatherFormData();
+            
+            // Create HTML content with all values filled in
+            const htmlContent = createFilledHTMLDocument(formData);
+            
+            // Create and download the file
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            
+            // Create filename with candidate name and date
+            const candidateName = formData.candidateName || 'Assessment';
+            const cleanName = candidateName.replace(/[^a-zA-Z0-9]/g, '_');
+            const timestamp = new Date().toISOString().split('T')[0];
+            a.download = `${cleanName}_Assessment_${timestamp}.html`;
+            
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            
+            alert('HTML file created successfully! The file shows all your entered details and can be opened on any computer.');
+        }
+        
+        // Create complete HTML document with filled values
+        function createFilledHTMLDocument(data) {
+            // Build the scores table with current values
+            const competencies = [
+                'Initiative', 'Stress Tolerance', 'Planning & Organizing', 'Work Standards',
+                'Teamwork', 'Communication Skills', 'Leadership / Ownership', 
+                'Technical Questions', 'Organizational Fit'
+            ];
+            
+            let scoresTableRows = '';
+            for (let i = 0; i < competencies.length; i++) {
+                const score = data.scores[i] || '';
+                const notes = data.notes[i] || '';
+                scoresTableRows += `
+                    <tr>
+                        <td><strong>${competencies[i]}</strong></td>
+                        <td style="text-align: center; font-size: 18px; font-weight: bold; color: #8B4513;">${score}</td>
+                        <td>${notes}</td>
+                    </tr>
+                `;
+            }
+            
+            return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assessment Report - ${data.candidateName || 'Candidate'}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo h1 {
+            color: #8B4513;
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .logo .consulting {
+            color: #333;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+        .form-title {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #333;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px 0 30px 0;
+            color: #333;
+        }
+        .info-section {
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        .info-label {
+            font-weight: bold;
+            width: 120px;
+            margin-right: 10px;
+        }
+        .info-value {
+            font-weight: bold;
+            color: #8B4513;
+        }
+        .section-title {
+            font-weight: bold;
+            font-style: italic;
+            margin: 20px 0 15px 0;
+            font-size: 16px;
+            color: #8B4513;
+        }
+        .panel-table, .scoring-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        .panel-table th, .panel-table td,
+        .scoring-table th, .scoring-table td {
+            border: 1px solid #333;
+            padding: 8px;
+            text-align: left;
+        }
+        .panel-table th, .scoring-table th {
+            background-color: #8B4513;
+            color: white;
+            font-weight: bold;
+        }
+        .scoring-guide {
+            margin: 20px 0;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .scoring-guide-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .score-number {
+            font-weight: bold;
+            width: 20px;
+            margin-right: 20px;
+            color: #8B4513;
+        }
+        .average-section {
+            margin: 20px 0;
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: #8B4513;
+            background-color: #fff5f0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #8B4513;
+        }
+        .feedback-section, .comments-section {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .recommendation-section {
+            margin: 20px 0;
+            background-color: #fff5f0;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 5px solid #8B4513;
+        }
+        .recommendation-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #8B4513;
+        }
+        .signature-section {
+            margin: 30px 0;
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+        }
+        .completed-stamp {
+            text-align: center;
+            color: #8B4513;
+            font-weight: bold;
+            margin: 20px 0;
+            font-size: 14px;
+            background-color: #fff5f0;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #8B4513;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <h1>LIYEMA</h1>
+            <div class="consulting">CONSULTING</div>
+        </div>
+        
+        <div class="form-title">
+            Flexible Resource Management Candidate<br>Assessment Form
+        </div>
+        
+        <div class="subtitle">
+            Interview Scorecard Report
+        </div>
+        
+        <div class="completed-stamp">
+            ✅ COMPLETED ASSESSMENT REPORT ✅<br>
+            Generated on: ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}
+        </div>
+        
+        <!-- Basic Information -->
+        <div class="info-section">
+            <div class="section-title">Candidate Information:</div>
+            <div class="info-row">
+                <span class="info-label">Candidate Name:</span>
+                <span class="info-value">${data.candidateName || 'Not specified'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Position:</span>
+                <span class="info-value">${data.position || 'Not specified'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Interview Date:</span>
+                <span class="info-value">${data.interviewDate || 'Not specified'}</span>
+            </div>
+        </div>
+        
+        <!-- Panel Members -->
+        <div class="section-title">Panel Members:</div>
+        <table class="panel-table">
+            <thead>
+                <tr>
+                    <th>Panel Member</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>${data.panelist1 || 'Not specified'}</td>
+                    <td>${data.role1 || 'Not specified'}</td>
+                </tr>
+                <tr>
+                    <td>${data.panelist2 || 'Not specified'}</td>
+                    <td>${data.role2 || 'Not specified'}</td>
+                </tr>
+                <tr>
+                    <td>${data.panelist3 || 'Not specified'}</td>
+                    <td>${data.role3 || 'Not specified'}</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Scoring Guide -->
+        <div class="scoring-guide">
+            <div class="section-title">Scoring Guide:</div>
+            <div class="scoring-guide-item"><div class="score-number">5</div><div>Excellent</div></div>
+            <div class="scoring-guide-item"><div class="score-number">4</div><div>Good</div></div>
+            <div class="scoring-guide-item"><div class="score-number">3</div><div>Satisfactory</div></div>
+            <div class="scoring-guide-item"><div class="score-number">2</div><div>Below Average</div></div>
+            <div class="scoring-guide-item"><div class="score-number">1</div><div>Poor</div></div>
+            <div class="scoring-guide-item"><div class="score-number">0</div><div>Not Observed</div></div>
+        </div>
+        
+        <!-- Core Competencies Scoring -->
+        <div class="section-title">Core Competencies Assessment:</div>
+        <table class="scoring-table">
+            <thead>
+                <tr>
+                    <th>Competency</th>
+                    <th>Score</th>
+                    <th>Panel Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${scoresTableRows}
+            </tbody>
+        </table>
+        
+        <!-- Average Score -->
+        <div class="average-section">
+            OVERALL SCORE: ${data.averageScore || 'Not calculated'} / 5.0
+        </div>
+        
+        <!-- Feedback -->
+        <div class="feedback-section">
+            <div class="section-title">Feedback:</div>
+            <p>${data.feedback || 'No feedback provided'}</p>
+        </div>
+        
+        <!-- Additional Comments -->
+        <div class="comments-section">
+            <div class="section-title">Additional Comments:</div>
+            <p>${data.additionalComments || 'No additional comments'}</p>
+        </div>
+        
+        <!-- Final Recommendation -->
+        <div class="recommendation-section">
+            <div class="section-title">Final Recommendation:</div>
+            <div class="recommendation-value">${data.recommendation || 'No recommendation selected'}</div>
+        </div>
+        
+        <!-- Signature Section -->
+        <div class="signature-section">
+            <div class="section-title">Assessment Completed By:</div>
+            <div class="info-row">
+                <span class="info-label">Panelist Name:</span>
+                <span class="info-value">${data.panelistName || 'Not specified'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Date:</span>
+                <span class="info-value">${data.signatureDate || 'Not specified'}</span>
+            </div>
+        </div>
+        
+        <!-- Contact Information -->
+        <div class="contact-info">
+            📞 +27 11 484 9339 &nbsp;&nbsp; 📧 info@liyemahr.co.za &nbsp;&nbsp; 🌐 www.liyemahr.co.za &nbsp;&nbsp; 📍 Johannesburg, South Africa
+        </div>
+    </div>
+</body>
+</html>`;
+        }
+
         // Print form
         function printForm() {
             window.print();
