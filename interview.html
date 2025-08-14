@@ -1368,32 +1368,22 @@
             return data;
         }
         
-        // Generate filled HTML document (SAME FUNCTION - creates another editable copy)
+        // Generate filled HTML document (creates another fully functional copy)
         function generateFilledHTML(data) {
-            // This function will create another fully functional copy...
-            // [The function continues with the same full HTML generation]
-            return document.documentElement.outerHTML;
-        }
-        
-        // Print form
-        function printForm() {
-            window.print();
-        }
-        
-        // Initialize the form
-        document.addEventListener('DOMContentLoaded', function() {
-            setupRecommendationCheckboxes();
-            setupAutoSave();
-            calculateAverage(); // Calculate with pre-filled data
+            // Create a complete copy of the current document with all the current values
+            const currentHTML = document.documentElement.outerHTML;
             
-            if (!document.getElementById('signatureDate').value) {
-                document.getElementById('signatureDate').value = new Date().toISOString().split('T')[0];
-            }
-        });
-    </script>
-</body>
-</html>\`;
-        }
+            // Create a clean filename-safe version
+            const candidateName = data.candidateName.replace(/[^a-zA-Z0-9]/g, '_');
+            const timestamp = new Date().toISOString().split('T')[0];
+            
+            // Update the title to reflect it's an editable copy
+            const updatedHTML = currentHTML.replace(
+                /<title>.*?<\/title>/,
+                '<title>Editable Assessment - ' + data.candidateName + ' - ' + timestamp + '</title>'
+            );
+            
+            return updatedHTML;
         }
         
         // Print form
